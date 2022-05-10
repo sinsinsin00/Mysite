@@ -42,28 +42,49 @@
         </div>
     </nav>
     <!-- Page Header-->
-    <header class="masthead" style="background-image: url({% static '/blog/assets/img/about-bg.jpg' %})">
+    <header class="masthead" style="background-image: url({% static '/blog/assets/img/post-bg.jpg' %})">
         <div class="container position-relative px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <div class="col-md-10 col-lg-8 col-xl-7">
-                    <div class="page-heading">
-                        <h1>About Me</h1>
-                        <span class="subheading">This is what I do.</span>
+                    <div class="post-heading">
+                        <h1>Man must explore, and this is exploration at its greatest</h1>
+                        <h2 class="subheading">Problems look mighty small from 150 miles up</h2>
+                        <span class="meta">
+                            Posted by
+                            <a href="#!">Start Bootstrap</a>
+                            on August 24, 2022
+                        </span>
                     </div>
                 </div>
             </div>
         </div>
     </header>
-    <!-- Main Content-->
-    <main class="mb-4">
+    <!-- Post Content-->
+    <article class="mb-4">
         <div class="container px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <div class="col-md-10 col-lg-8 col-xl-7">
                     <!-- KSS 내용을 이력하는 곳-->
+                    <h2 class="entry-title">
+                        <h2>{{ post.title }}</h2>
+                        <div class="entry-date published">{{ post.createDate}}</div>
+                        <p>{{ post.content }}</p>
+
+                        <!--image load -->
+                        {% if post.title_image %}
+                        <div class="post-full-width">
+                            <img src="{{ post.title_image.url }}" alt="">
+                        </div>
+                        {%endif%}
+
+                    </h2>
                 </div>
             </div>
         </div>
-    </main>
+    </article>
+
+
+
     <!-- Footer-->
     <footer class="border-top">
         <div class="container px-4 px-lg-5">
