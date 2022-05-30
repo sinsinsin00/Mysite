@@ -1,8 +1,10 @@
-from django.shortcuts import render, HttpResponse
-from django.views import generic
+from django.shortcuts import render, render
+from rest_framework.views import APIView
+from content.models import Feed
 
 
 # Create your views here.
-def shinstagram(request):
-    context = {}
-    return render(request, "shinstagram.html", context=context)
+class Main(APIView):
+    def shinstagram(request):
+        feed_list = Feed.objects.all().order_by('-id')
+        return render(request, "shinstagram.html", context=dict(feed_list=feed_list))

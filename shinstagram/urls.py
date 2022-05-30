@@ -18,5 +18,5 @@ from shinstagram import views
 
 urlpatterns = [
     #path("", views.index, name="index"),
-    path("shinstagram/", views.shinstagram, name="shinstagram"),
+    path("shinstagram/", views.Main.shinstagram, name="Main.shinstagram"),
 ]
