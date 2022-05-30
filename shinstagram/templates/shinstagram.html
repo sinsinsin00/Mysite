@@ -15,10 +15,10 @@
         rel="stylesheet">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    
+
     <!-- jquery 사용하기 위해 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    
+
     <!-- style -->
     <style>
         .box {
@@ -109,7 +109,7 @@
             text-align: center;
         }
 
-        .modal_image_upload{
+        .modal_image_upload {
             outline: 2px dashed black;
             outline-offset: -10px;
             text-align: center;
@@ -118,7 +118,6 @@
             height: 548px;
 
         }
-
     </style>
 </head>
 
@@ -152,17 +151,14 @@
                 <div style="display: flex; flex-direction: row; ">
                     <div>
                         <div class="box" style="width: 60px; height: 60px; margin-top: 15px; margin-left: 15px;">
-                            <img class="profile"
-                                src="{{ feed.profile_image }}">
+                            <img class="profile" src="{{ feed.profile_image }}">
                         </div>
                     </div>
                     <div class="user_id">
                         {{ feed.user_id }}
                     </div>
                 </div>
-                <div><img class="user_image"
-                        src="{{ feed.image }}"
-                        alt=""></div>
+                <div><img class="user_image" src="{{ feed.image }}" alt=""></div>
                 <div class="user_contents">
                     <div style="display: flex; flex-direction: row; justify-content: space-between">
                         <div>
@@ -197,7 +193,7 @@
             {% endfor %}
             <!--피드엔드-->
         </div>
-        
+
         <div style="width: 400px; height: 1000px; position: fixed; left:60%">
             <div style="width: 400px; min-width: 400px;height: 1000px; margin-right: 400px; ">
                 <div>
@@ -330,8 +326,7 @@
                         style="display: flex; flex-direction: row; align-items: center; justify-content: space-between">
                         <div style="display: flex; flex-direction: row;">
                             <div class="box" style="width: 40px; height: 40px; margin-top: 15px; margin-left: 15px;">
-                                <img class="profile"
-                                    src="https://t1.daumcdn.net/cfile/tistory/275BF04D53DCD1D138">
+                                <img class="profile" src="https://t1.daumcdn.net/cfile/tistory/275BF04D53DCD1D138">
                             </div>
                             <div class="user_id" style="margin-top: 17px; text-align: left; font-size: 13px">
                                 <div style="font-weight: bold;">
@@ -348,39 +343,42 @@
                         </div>
                     </div>
                 </div>
-                <div style="color: rgb(170, 170, 170);  font-size: 13px; margin-top: 35px; text-align: left">                
+                <div style="color: rgb(170, 170, 170);  font-size: 13px; margin-top: 35px; text-align: left">
                     <div>
                         <span><a style="color: rgb(170, 170, 170); text-decoration: none;" href="/#">소개·</a></span>
-                        <span><a style="color: rgb(170, 170, 170); text-decoration: none;"  href="/#">도움말·</a></span>
-                        <span><a style="color: rgb(170, 170, 170); text-decoration: none;"  href="/#">홍보 센터·</a></span>
-                        <span><a style="color: rgb(170, 170, 170); text-decoration: none;"  href="/#">API·</a></span>
-                        <span><a style="color: rgb(170, 170, 170); text-decoration: none;"  href="/#">채용 정보·</a></span>
+                        <span><a style="color: rgb(170, 170, 170); text-decoration: none;" href="/#">도움말·</a></span>
+                        <span><a style="color: rgb(170, 170, 170); text-decoration: none;" href="/#">홍보 센터·</a></span>
+                        <span><a style="color: rgb(170, 170, 170); text-decoration: none;" href="/#">API·</a></span>
+                        <span><a style="color: rgb(170, 170, 170); text-decoration: none;" href="/#">채용 정보·</a></span>
                     </div>
                     <div>
-                        <span><a style="color: rgb(170, 170, 170); text-decoration: none;" href="/#">개인정보처리방침·</a></span>
-                        <span><a style="color: rgb(170, 170, 170); text-decoration: none;"  href="/#">약관·</a></span>
-                        <span><a style="color: rgb(170, 170, 170); text-decoration: none;"  href="/#">위치·</a></span>
-                        <span><a style="color: rgb(170, 170, 170); text-decoration: none;"  href="/#">인기 계정·</a></span>
-                        <span><a style="color: rgb(170, 170, 170); text-decoration: none;"  href="/#">해시태그·</a></span>
+                        <span><a style="color: rgb(170, 170, 170); text-decoration: none;"
+                                href="/#">개인정보처리방침·</a></span>
+                        <span><a style="color: rgb(170, 170, 170); text-decoration: none;" href="/#">약관·</a></span>
+                        <span><a style="color: rgb(170, 170, 170); text-decoration: none;" href="/#">위치·</a></span>
+                        <span><a style="color: rgb(170, 170, 170); text-decoration: none;" href="/#">인기 계정·</a></span>
+                        <span><a style="color: rgb(170, 170, 170); text-decoration: none;" href="/#">해시태그·</a></span>
                     </div>
                     <div>
                         <span><a style="color: rgb(170, 170, 170); text-decoration: none;" href="/#">언어·</a></span>
                     </div>
                     <p>
                     <div>
-                        <span style="color: rgb(170, 170, 170); text-decoration: none; margin-top: 30px;">© 2022 INSTAGRAM FROM META</span>
+                        <span style="color: rgb(170, 170, 170); text-decoration: none; margin-top: 30px;">© 2022
+                            INSTAGRAM FROM META</span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div id="modal_add_feed"class="modal_overlay">
+    <!-- 첫번째 모달-->
+    <div id="first_modal_add_feed" class="modal_overlay">
         <div class="modal_window">
             <div class="modal_title">
                 <div class="modal_title_side"></div>
-                <div>새 게시물</div>
+                <div style="font-size: 16px;">새 이미지 업로드</div>
                 <div class="modal_title_side">
-                    <span id="close_modal" class="material-icons-outlined">
+                    <span id="first_close_modal" class="material-icons-outlined">
                         close
                     </span>
                 </div>
@@ -392,49 +390,174 @@
         </div>
     </div>
 
+    <!-- 두번째 모달-->
+    <div id="second_modal_add_feed" class="modal_overlay">
+        <div class="modal_window">
+            <div class="modal_title">
+                <div class="modal_title_side"></div>
+                <div id="next_modal"style="color: rgb(65, 129, 182); font-size: 16px">다음</div>
+                <div class="modal_title_side">
+                    <span id="second_close_modal" class="material-icons-outlined">
+                        close
+                    </span>
+                </div>
+            </div>
+            <div style="display: flex; flex-direction: row; ">
+                <div class="modal_image_upload">
+    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 세번째 모달-->
+    <div id="third_modal_add_feed" class="modal_overlay">
+        <div class="modal_window">
+            <div class="modal_title">
+                <div class="modal_title_side"></div>
+                <div id="share_content" style="color: rgb(65, 129, 182); font-size: 16px">공유하기</div>
+                <div class="modal_title_side">
+                    <span id="third_close_modal" class="material-icons-outlined">
+                        close
+                    </span>
+                </div>
+            </div>
+            <div style="display: flex; flex-direction: row; ">
+                <div class="modal_image_upload" style="width: 500px; height: 548px;">
+    
+                </div>
+                <div>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" style="width: 278px; height:200px; margin-left: 10px" placeholder="문구 입력..."></textarea>
+                    <div style="margin-left: 10px; margin-top: 5px; " class="dropdown">
+                        <button style="width: 278px;"class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                          접근성
+                        </button>
+                        <ul style="width: 278px" class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                          <li><a class="dropdown-item" href="#">Action</a></li>
+                          <li><a class="dropdown-item" href="#">Another action</a></li>
+                          <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                      </div>
+                      <div style="margin-left: 10px; margin-top: 5px; " class="dropdown">
+                        <button style="width: 278px;"class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                          고급 설정
+                        </button>
+                        <ul style="width: 278px" class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                          <li><a class="dropdown-item" href="#">Action</a></li>
+                          <li><a class="dropdown-item" href="#">Another action</a></li>
+                          <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                      </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
     <!-- JAVA SCRIPT START -->
     <script>
-        // 모달 띄우기 코드
-        const modal = document.getElementById("modal_add_feed");
-        const buttonAddFeed = document.getElementById("add_feed_box");
-        const buttonclosemodal = document.getElementById("close_modal");
-        buttonAddFeed.addEventListener("click", e => {
-            modal.style.top = window.pageYOffset + "px";// top을 이용해 시작 y위치를 바꿔줌 
-            modal.style.display = "flex";               // display modal 
-            document.body.style.overflowY = "hidden";   // out of scroll
+        // <!-- jquery 부분 -->
+
+        $('#add_feed_box').click(function () {
+            console.log()
+            $('#first_modal_add_feed').css({
+                display: 'flex'
+            });
+
+            $(document.body).css({
+                overflow: 'hidden'
+            });
         });
 
-        // 모달 닫기 코드
-        buttonclosemodal.addEventListener("click", e =>{
-            modal.style.display = "none";
-            document.body.style.overflowY = "visible";   // out of scroll
+        $('#first_close_modal').click(function () {
+            $('#first_modal_add_feed').css({
+                display: 'none'
+            });
 
-        }); 
-        // <!-- jquery 부분 -->
+            $(document.body).css({
+                overflow: 'visible'
+            });
+
+            $('.modal_image_upload').css({
+                "background-image": "none",
+                "background-color": "white",
+                "outline": "2px dashed black",
+            })
+        });
+
+        $('#second_close_modal').click(function () {
+            $('#second_modal_add_feed').css({
+                display: 'none'
+            });
+
+            $(document.body).css({
+                overflow: 'visible'
+            });
+
+            $('.modal_image_upload').css({
+                "background-image": "none",
+                "background-color": "white",
+                "outline": "2px dashed black",
+            })
+        });
+
+        $('#third_close_modal').click(function () {
+            $('#third_modal_add_feed').css({
+                display: 'none'
+            });
+
+            $(document.body).css({
+                overflow: 'visible'
+            });
+
+            $('.modal_image_upload').css({
+                "background-image": "none",
+                "background-color": "white",
+                "outline": "2px dashed black",
+            })
+        });
+
+        $('#next_modal').click(function(){
+            $('#second_modal_add_feed').css({
+                display: 'none'
+            });
+
+            $('#third_modal_add_feed').css({
+                display: 'flex'
+            });
+        });
+
+        $('#share_content').click(function(){
+            ;
+        });
+
+
+
+
         $('.modal_image_upload')
             .on("dragover", dragover)
             .on("dragleave", dragover)
             .on("drop", uploadFiles);
 
-        function dragover(e){
+        function dragover(e) {
             e.stopPropagation();
             e.preventDefault();
 
             if (e.type == "dragover") {
                 $(e.target).css({
-                    "background-color":"black",
-                    "outline-offset":"-20px"
+                    "background-color": "black",
+                    "outline-offset": "-20px"
                 });
 
             } else {
                 $(e.target).css({
-                    "background-color":"white",
-                    "outline-offset":"-10px"
+                    "background-color": "white",
+                    "outline-offset": "-10px"
                 });
             }
         }
 
-        function uploadFiles(e){
+        function uploadFiles(e) {
             e.stopPropagation();
             e.preventDefault();
 
@@ -446,14 +569,29 @@
                 return;
             }
 
-            if(files[0].type.match(/image.*/)){
-                $(e.target).css({
-                    "backround-image":"url(" + window.URL.createObjectURL(files[0]) + ")",
-                    "outline": "none",
-                    "background-size":"100% 100%"})
+            if (files[0].type.match(/image.*/)) {
+                $('#first_modal_add_feed').css({
+                    display: 'none'
+                });
 
-            }else{
+                $('#second_modal_add_feed').css({
+                    display: 'flex'
+                });
+
+                $('.modal_image_upload').css({
+                    "background-image": "url(" + window.URL.createObjectURL(files[0]) + ")",
+                    "outline": "none",
+                    "background-size": "auto",
+                    "background-repeat": "no-repeat",
+                    "background-position": "center",
+                })
+
+            } else {
                 alert('이미지가 아닙니다');
+                $(e.target).css({
+                    "background-color": "white",
+                    "outline-offset": "-10px"
+                });
                 return;
             }
         }
