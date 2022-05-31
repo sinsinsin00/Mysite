@@ -151,10 +151,10 @@
                 <div style="display: flex; flex-direction: row; ">
                     <div>
                         <div class="box" style="width: 60px; height: 60px; margin-top: 15px; margin-left: 15px;">
-                            <img class="profile" src="{{ feed.profile_image }}">
+                            <img id="user_profile_image" class="profile" src="{{ feed.profile_image }}">
                         </div>
                     </div>
-                    <div class="user_id">
+                    <div id="feed_user_id" class="user_id">
                         {{ feed.user_id }}
                     </div>
                 </div>
@@ -427,7 +427,7 @@
     
                 </div>
                 <div>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" style="width: 278px; height:200px; margin-left: 10px" placeholder="문구 입력..."></textarea>
+                    <textarea class="form-control" id="modal_content_upload" rows="5" style="width: 278px; height:200px; margin-left: 10px" placeholder="문구 입력..."></textarea>
                     <div style="margin-left: 10px; margin-top: 5px; " class="dropdown">
                         <button style="width: 278px;"class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                           접근성
@@ -458,6 +458,7 @@
     <script>
         // <!-- jquery 부분 -->
 
+        //Add icon click
         $('#add_feed_box').click(function () {
             console.log()
             $('#first_modal_add_feed').css({
@@ -469,6 +470,7 @@
             });
         });
 
+        //Click close Btn icon in First-Modal  
         $('#first_close_modal').click(function () {
             $('#first_modal_add_feed').css({
                 display: 'none'
@@ -485,6 +487,7 @@
             })
         });
 
+        //Click close Btn icon in second-Modal
         $('#second_close_modal').click(function () {
             $('#second_modal_add_feed').css({
                 display: 'none'
@@ -501,6 +504,7 @@
             })
         });
 
+        //Click close Btn icon in Third-Modal
         $('#third_close_modal').click(function () {
             $('#third_modal_add_feed').css({
                 display: 'none'
@@ -517,6 +521,7 @@
             })
         });
 
+        //Click  text 'next' in Third-Modal
         $('#next_modal').click(function(){
             $('#second_modal_add_feed').css({
                 display: 'none'
@@ -527,13 +532,7 @@
             });
         });
 
-        $('#share_content').click(function(){
-            ;
-        });
-
-
-
-
+        //drag and drop func
         $('.modal_image_upload')
             .on("dragover", dragover)
             .on("dragleave", dragover)
@@ -555,14 +554,16 @@
                     "outline-offset": "-10px"
                 });
             }
-        }
+        };
 
+        //Print Image in modal func
+        var files
         function uploadFiles(e) {
             e.stopPropagation();
             e.preventDefault();
 
             e.dataTransfer = e.originalEvent.dataTransfer;
-            var files = e.dataTransfer.files;
+            files = e.dataTransfer.files;
 
             if (files.length > 1) {
                 alert('하나만 올려라');
@@ -594,7 +595,73 @@
                 });
                 return;
             }
-        }
+        };
+        
+        //Click text 'share' in Third-Modal
+        $('#share_content').on('click',()=>{
+            const image = $('.modal_image_upload').css("background-image").replace(/^url\(['"](.+)['"]\)/, '$1');
+            const content = $('#modal_content_upload').val();
+            const profile_image = $('#user_profile_image').attr('src');
+            const user_id  = $('#feed_user_id').text();
+            
+            const file = files[0]
+            
+            let fd = new FormData();
+
+            fd.append('file', file);
+            fd.append('image', image);
+            fd.append('content', content);
+            fd.append('profile_image', profile_image);
+            fd.append('user_id', user_id);
+
+            if(image.length <= 0)
+            {
+                alert("이미지가 비어있습니다.");
+            }
+            else if(content.length <= 0)
+            {
+                alert("설명을 입력하세요");
+            }
+            else{
+                writeFeed(fd);
+                console.log(files[0]);
+            }
+            console.log("share_content - success")
+        });
+
+        //Upload content to Server func
+        function writeFeed(fd) {
+            $.ajax({
+                url: "/content/upload",
+                data: fd,
+                method: "POST",
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    console.log("success");
+                },
+                error: function (request, status, error) {
+                    console.log("error");
+                },
+                complete: function () {
+                    console.log("execute");
+                    $('#third_modal_add_feed').css({
+                        display: 'none'
+                    });
+
+                    $(document.body).css({
+                        overflow: 'visible'
+                    });
+
+                    $('.modal_image_upload').css({
+                        "background-image": "none",
+                        "background-color": "white",
+                        "outline": "2px dashed black",
+                    })
+                    location.reload();
+                }
+            })
+        };
 
     </script>
     <!-- JAVA SCRIPT END -->

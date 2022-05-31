@@ -14,9 +14,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path
-from shinstagram import views
+from shinstagram.views import Main, UploadFeed 
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     #path("", views.index, name="index"),
-    path("shinstagram/", views.Main.shinstagram, name="Main.shinstagram"),
+    path("shinstagram/", Main.shinstagram, name="Main.shinstagram"),
+    path('content/upload/', UploadFeed.as_view()),
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
