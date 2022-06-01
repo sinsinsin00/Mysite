@@ -1,17 +1,11 @@
-from django.contrib             import admin
 from django.urls                import path, include
 from django.views.generic       import RedirectView
 from django.conf                import settings
 from django.conf.urls.static    import static
-
+from content.views              import  UploadFeed 
 
 urlpatterns = [
-    path('',include('blog.urls')),
-    path('',include('shinstagram.urls')),
-    path('',include('content.urls')),
-    path('',include('user.urls')),
-    path('blog/',include('blog.urls')),
-    path('admin/', admin.site.urls),
+    path('content/upload/', UploadFeed.as_view()),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)

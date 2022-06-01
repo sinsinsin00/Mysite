@@ -1,17 +1,14 @@
-from django.contrib             import admin
 from django.urls                import path, include
 from django.views.generic       import RedirectView
 from django.conf                import settings
 from django.conf.urls.static    import static
+from .views                     import Join, Login
+
 
 
 urlpatterns = [
-    path('',include('blog.urls')),
-    path('',include('shinstagram.urls')),
-    path('',include('content.urls')),
-    path('',include('user.urls')),
-    path('blog/',include('blog.urls')),
-    path('admin/', admin.site.urls),
+    path('user/join/',  Join.get  , name="get"),
+    path('user/login/', Login.get , name="get"),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)
