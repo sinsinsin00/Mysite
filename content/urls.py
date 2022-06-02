@@ -5,7 +5,7 @@ from django.conf.urls.static    import static
 from content.views              import  UploadFeed 
 
 urlpatterns = [
-    path('content/upload/', UploadFeed.as_view()),
+    path('upload/', UploadFeed.as_view()),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)

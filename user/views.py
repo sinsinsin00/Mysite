@@ -6,10 +6,10 @@ from .models import User
 
 # Create your views here.
 class Join(APIView):
-    def get(request):
+    def get(self, request):
         return render(request,"join.html")
     
-    def post(request):
+    def post(self, request):
         email = request.data.get('email', None)
         nickname = request.data.get('nickname', None)
         name = request.data.get('name', None)
@@ -18,16 +18,16 @@ class Join(APIView):
         User.objects.create(email=email, 
                             nickname=nickname, 
                             name=name, 
-                            password=make_password(password)
-                            profile_image="default_image.jpg"
-                            )
+                            password=make_password(password),
+                            profile_image="default_image.jpg")
+         
         return Response(status=200)
         
     
 class Login(APIView):
-    def get(request):
+    def get(self, request):
         return render(request,"login.html")
     
-    def post(requst):
+    def post(self, requst):
         pass            
             
