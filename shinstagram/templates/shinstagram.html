@@ -22,6 +22,14 @@
 
     <!-- style -->
     <style>
+        .feed_profile_image_box {
+            width: 150px;
+            height: 150px;
+            border-radius: 70%;
+            overflow: hidden;
+
+        }
+
         .user_profile_image_box {
             width: 150px;
             height: 150px;
@@ -123,6 +131,7 @@
 </head>
 
 <body style="background-color: #FAFAFA;">
+    {% load static %}
     <nav class="navbar navbar-expand-lg navbar-light bg-light" style="position: fixed; width: 100%">
         <div class="container-fluid" style="justify-content: space-between;">
             <div>
@@ -140,6 +149,21 @@
                 <span id="add_feed_box" style="cursor:pointer" class="material-icons-outlined">add_box</span>
                 <span style="cursor:pointer" class="material-icons-outlined">explore</span>
                 <span style="cursor:pointer" class="material-icons-outlined">favorite_border</span>
+                <span style="cursor:pointer;" class="material-icons-outlined">                            
+                    <div>
+                        <a  href="#" role="button"  data-bs-toggle="dropdown" aria-expanded="false">
+                            <img style="margin-bottom: 10px; width: 24px; height: 24px; " class="profile"
+                            src="{% get_media_prefix %}{{ user.profile_image }}">
+                          </a>
+                          <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="margin:10px; border-radius:5px; border: 1px solid  rgb(206, 204, 204); left: 1670px; width: 230px; height:37 ">
+                            <li><a style="margin: 5px" class="dropdown-item" href="/user/profile" >프로필</a></li>
+                            <li><a style="margin: 5px" class="dropdown-item" href="#" >저장됨</a></li>
+                            <li><a style="margin: 5px" class="dropdown-item" href="#" >설정</a></li>
+                            <li><a style="margin :5px" class="dropdown-item" href="#" >계정 전환</a></li>
+                            <li style="border-top: 1px solid rgb(230, 229, 229)"><a style="margin: 5px;"class="dropdown-item" href="/user/logout" >로그아웃</a></li>
+                          </ul>
+                    </div>
+                </span>
             </div>
         </div>
     </nav>
@@ -148,11 +172,12 @@
         <div style="width: 600px; min-width: 600px;height: 100%; margin-right: 400px;">
             <!--피드 시작-->
             {% for feed in feed_list %}
+
             <div style="border: solid 1px rgb(223, 221, 221); background-color: white; margin-top: 25px;">
                 <div style="display: flex; flex-direction: row; ">
                     <div>
-                        <div class="user_profile_image_box" style="width: 60px; height: 60px; margin-top: 15px; margin-left: 15px;">
-                            <img id="user_profile_image" class="profile" src="{{ feed.profile_image }}">
+                        <div class="feed_profile_image_box" style="width: 60px; height: 60px; margin-top: 15px; margin-left: 15px;">
+                            <img id="feed_profile_image" class="profile" src="{% get_media_prefix %}{{ feed.profile_image }}">
                         </div>
                     </div>
                     <div id="feed_user_id" class="user_id">
@@ -191,6 +216,7 @@
                         placeholder="댓글 달기..." aria-label="comment" aria-describedby="basic-addon1">
                 </div>
             </div>
+
             {% endfor %}
             <!--피드엔드-->
         </div>
@@ -201,16 +227,16 @@
                     <div
                         style="display: flex; flex-direction: row; align-items: center; justify-content: space-between">
                         <div style="display: flex; flex-direction: row;">
-                            <div class="box" style="width: 60px; height: 60px; margin-top: 15px; margin-left: 15px;">
+                            <div class="user_profile_image_box" style="width: 60px; height: 60px; margin-top: 15px; margin-left: 15px;">
                                 <img class="profile"
-                                    src="http://t3.gstatic.com/licensed-image?q=tbn:ANd9GcQJyEHVESEqmxJrqjqvMyqz7zz0drMlAhU6FDDuT7JsOKwjcoLpkfFCOLtUZ2wP1rcf">
+                                    src="{% get_media_prefix %}{{ user.profile_image }}">
                             </div>
                             <div class="user_id" style="margin-top: 17px; text-align: left">
                                 <div style="font-weight: bold;">
-                                    IU
+                                    {{ user.name }}
                                 </div>
                                 <div style="color: rgb(170, 170, 170)">
-                                    Lee Ji-Eun
+                                    {{ user.nickname }}
                                 </div>
                             </div>
                         </div>
@@ -234,7 +260,7 @@
                     <div
                         style="display: flex; flex-direction: row; align-items: center; justify-content: space-between">
                         <div style="display: flex; flex-direction: row;">
-                            <div class="box" style="width: 40px; height: 40px; margin-top: 15px; margin-left: 15px;">
+                            <div class="user_profile_image_box" style="width: 40px; height: 40px; margin-top: 15px; margin-left: 15px;">
                                 <img class="profile"
                                     src="https://s-media-cache-ak0.pinimg.com/originals/56/ff/14/56ff14ca08165c099fc45f207520dfe0.jpg">
                             </div>
@@ -257,7 +283,7 @@
                     <div
                         style="display: flex; flex-direction: row; align-items: center; justify-content: space-between">
                         <div style="display: flex; flex-direction: row;">
-                            <div class="box" style="width: 40px; height: 40px; margin-top: 15px; margin-left: 15px;">
+                            <div class="user_profile_image_box" style="width: 40px; height: 40px; margin-top: 15px; margin-left: 15px;">
                                 <img class="profile"
                                     src="http://file3.instiz.net/data/file3/2019/04/02/4/7/2/472ea455af482073b867a928edb77f0f.jpg">
                             </div>
@@ -280,7 +306,7 @@
                     <div
                         style="display: flex; flex-direction: row; align-items: center; justify-content: space-between">
                         <div style="display: flex; flex-direction: row;">
-                            <div class="box" style="width: 40px; height: 40px; margin-top: 15px; margin-left: 15px;">
+                            <div class="user_profile_image_box" style="width: 40px; height: 40px; margin-top: 15px; margin-left: 15px;">
                                 <img class="profile"
                                     src="https://i.ytimg.com/vi/d2nMizSaxiA/hqdefault.jpg?sqp=-oaymwEXCNACELwBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLBPkPtITpQv4ZpjaW_qVZoPX-FUkA">
                             </div>
@@ -303,7 +329,7 @@
                     <div
                         style="display: flex; flex-direction: row; align-items: center; justify-content: space-between">
                         <div style="display: flex; flex-direction: row;">
-                            <div class="box" style="width: 40px; height: 40px; margin-top: 15px; margin-left: 15px;">
+                            <div class="user_profile_image_box" style="width: 40px; height: 40px; margin-top: 15px; margin-left: 15px;">
                                 <img class="profile"
                                     src="https://mblogthumb-phinf.pstatic.net/MjAxNzA3MzBfMTM4/MDAxNTAxNDAwMjI3NDAw.YqWlD3dnAt3Hc6CBoO2fWfyz9vESGPaklO5W6VdQ9dsg.EOGhpJ_mf6cA5k28zYTAUipYxGXij3aO93C9NBiHXjAg.JPEG.cocoastudio-psj/1487927554173676.jpg?type=w800">
                             </div>
@@ -326,7 +352,7 @@
                     <div
                         style="display: flex; flex-direction: row; align-items: center; justify-content: space-between">
                         <div style="display: flex; flex-direction: row;">
-                            <div class="box" style="width: 40px; height: 40px; margin-top: 15px; margin-left: 15px;">
+                            <div class="user_profile_image_box" style="width: 40px; height: 40px; margin-top: 15px; margin-left: 15px;">
                                 <img class="profile" src="https://t1.daumcdn.net/cfile/tistory/275BF04D53DCD1D138">
                             </div>
                             <div class="user_id" style="margin-top: 17px; text-align: left; font-size: 13px">
@@ -522,7 +548,7 @@
             })
         });
 
-        //Click  text 'next' in Third-Modal
+        // 다음 클릭 //
         $('#next_modal').click(function(){
             $('#second_modal_add_feed').css({
                 display: 'none'
@@ -533,7 +559,7 @@
             });
         });
 
-        //drag and drop func
+        // 드레그 엔 드랍 //
         $('.modal_image_upload')
             .on("dragover", dragover)
             .on("dragleave", dragover)
@@ -557,7 +583,7 @@
             }
         };
 
-        //Print Image in modal func
+        // 모달 화면에 이미지 올리기 //
         var files
         function uploadFiles(e) {
             e.stopPropagation();
@@ -598,11 +624,11 @@
             }
         };
         
-        //Click text 'share' in Third-Modal
+        // 모달 3 공유하기 버튼 //
         $('#share_content').on('click',()=>{
             const image = $('.modal_image_upload').css("background-image").replace(/^url\(['"](.+)['"]\)/, '$1');
             const content = $('#modal_content_upload').val();
-            const profile_image = $('#user_profile_image').attr('src');
+            const profile_image = $('#feed_profile_image').attr('src');
             const user_id  = $('#feed_user_id').text();
             
             const file = files[0]
@@ -630,7 +656,7 @@
             console.log("share_content - success")
         });
 
-        //Upload content to Server func
+        // 업로드 피드 //
         function writeFeed(fd) {
             $.ajax({
                 url: "/content/upload",
@@ -661,9 +687,25 @@
                     })
                     location.reload();
                 }
-            })
+            })            
         };
-
+        // 로그아웃 //
+        $('#login_button').click(function() {
+          
+            $.ajax({
+              url: "/user/logout/",
+              method: "GET",
+              dataType: "json",
+              success: function (data) {
+                  console.log("success");
+              },
+              error: function (request, status, error) {
+                  let data = JSON.parse(request.responseText);
+                  console.log("error");
+                  alert(data.message);
+              }
+            });
+          });
     </script>
     <!-- JAVA SCRIPT END -->
 

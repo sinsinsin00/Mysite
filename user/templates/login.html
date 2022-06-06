@@ -59,17 +59,17 @@
         </div>
         <div style="margin:20px; padding: 0 25px 25px 20px;">
             <div class="form-floating mb-3" style="margin-bottom: 0.5rem!important;">
-              <input type="email" class="form-control" style="font-size: 14px; height: 24px; padding: 1.2rem 0.75rem;" id="floatingInput" placeholder="name@example.com">
+              <input type="email" class="form-control" style="font-size: 14px; height: 24px; padding: 1.2rem 0.75rem;" id="input_email" placeholder="name@example.com">
               <label for="floatingInput" style="font-size: 14px; color:#c5c4c4; padding: 0.5em;">이메일 주소</label>
             </div>
             <div class="form-floating" mb-3 style="margin-bottom: 0.5rem!important;">
-              <input type="password" class="form-control" id="floatingPassword" style="font-size: 14px; height: 24px; padding: 1.2rem 0.75rem;" placeholder="Password">
+              <input type="password" class="form-control" id="input_password" style="font-size: 14px; height: 24px; padding: 1.2rem 0.75rem;" placeholder="Password">
               <label for="floatingPassword" style="font-size: 14px; color:#c5c4c4; padding: 0.5em;">비밀번호</label>
             </div>
         </div>
       </div>
       <div>
-        <buttonid="join_button" class="btn btn-primary" style="width: 100%">로그인</button>
+        <button id="login_button" class="btn btn-primary" style="width: 100%">로그인</button>
       </div>
     </div>
   </div>
@@ -79,6 +79,31 @@
     </div>
   </div>
 
+  <script>
+    $('#login_button').click(function() {
+      let email = $('#input_email').val();
+      let password = $('#input_password').val();
+      
+      $.ajax({
+        url: "/user/login/",
+        data: {
+          email : email,
+          password : password,
+        },
+        method: "POST",
+        dataType: "json",
+        success: function (data) {
+            console.log("success");
+            location.replace( '{% url 'Main.shinstagram'%}' );
+        },
+        error: function (request, status, error) {
+            let data = JSON.parse(request.responseText);
+            console.log("error");
+            alert(data.message);
+        }
+      });
+    });
+  </script>
 
   <!-- Optional JavaScript; choose one of the two! -->
 
