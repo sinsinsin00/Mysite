@@ -1,9 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.hashers import make_password, check_password
 from django.contrib.auth         import authenticate, login
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .models import User
+import os
+from mysite.settings import MEDIA_ROOT
+from uuid import uuid4
 
 # Create your views here.
 class Join(APIView):
@@ -31,6 +34,11 @@ class Join(APIView):
     
 class Login(APIView):
     def get(self, request):
+        email = request.session.get('email', None)
+        
+        if email is not None:
+            return redirect("http://evolabs.co.kr/shinstagram")  
+        
         return render(request,"login.html")
     
     def post(self, request):
@@ -67,6 +75,37 @@ class Logout(APIView):
 class Profile(APIView):
     def get(self, request):
         email = request.session.get('email', None)
-        
         user = User.objects.filter(email=email).first()
-        return render(request, "profile.html", context=(dict(user=user)))
+        user_id = user.email[0:user.email.find('@')]
+        
+        return render(request, "profile.html", context=(dict(user_id=user_id, user=user )))
+    
+    def post(self, request):
+        pass
+    
+class UploadProfile(APIView):
+    def get(self, request):
+        pass
+    
+    def post(self, request):
+        file = request.FILES['file']
+        email = request.session.get('email', None)
+        user = User.objects.filter(email=email).first()
+
+        if user.profile_image != 'default_image.jpg':
+            try:
+                print("os path : ",os.path.join(MEDIA_ROOT,user.profile_image))
+                os.remove(os.path.join(MEDIA_ROOT,user.profile_image))    
+            except Exception as e:
+                print(e)
+
+        uuid_name = uuid4().hex
+        save_path = os.path.join(MEDIA_ROOT, uuid_name)
+        with open(save_path, 'wb+') as destination:
+            for chunk in file.chunks():
+                destination.write(chunk)
+        profile_image = uuid_name
+        user.profile_image = profile_image
+        user.save()
+        
+        return Response(status=200)

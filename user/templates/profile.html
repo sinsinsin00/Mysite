@@ -170,22 +170,34 @@
         </div>
     </nav>
     <div style="display: flex; flex-direction:row; text-align: center; justify-content: center; padding-top: 70px; ">
-        <div class="user_profile_image_box" style="margin-right: 30px; margin-top: 15px; margin-left: 15px;">
-            <img style="width: 150px; height: 150px;" class="profile" src="{% get_media_prefix %}{{ user.profile_image }}">
+
+        <div id="testdiv" style="margin-right: 100px;">
+            <div class="user_profile_image_box" style="margin-right: 30px; margin-top: 15px; margin-left: 15px;">
+                <form method="post" enctype="multipart/form-data">
+                    <div>
+                        <label for="input_user_profile_image">
+                           <img id="div1" style="width: 150px; height: 150px; cursor:pointer" src="{% get_media_prefix %}{{ user.profile_image }}">
+                        </label>
+                    </div>
+                    <input type="file" id="input_user_profile_image" name="input_user_profile_image" onchange="uploadProfileImage()" accept="image/*" style="display: none; ">
+                </form>
+            </div>
         </div>
         <div>
-            <div style="align-items: center; flex-direction: row; flex-shrink: 1; margin-bottom: 20px; ">
-                [아이디]
-                [프로필 편집 버튼]
-                [설정 버튼]
-            </div>
-            <div style="display: flex; flex-direction:row; margin-bottom: 20px;">
-                [게시물 갯수]
-                [팔로워]
-                [팔로우]
-            </div>
-            <div style="display: block;">
-                <span>이름</span>
+            <div style="margin-top: 15px;">
+                <div style="align-items: center; flex-direction: row; flex-shrink: 1; margin-bottom: 20px; ">
+                    <span style="font-size: 24px; margin-right: 15px;">{{ user_id }}</span>
+                    <span style="margin-right: 15px; border: solid 1px rgb(216, 215, 215); padding: 5px 9px 5px 9px; border-radius: 4px; font-size: 14px;">프로필 편집</span>
+                    <span style="margin-right: 15px; cursor:pointer" class="material-icons-outlined">settings</span>
+                </div>
+                <div style="display: flex; flex-direction:row; margin-bottom: 20px;">
+                    [게시물 갯수]
+                    [팔로워]
+                    [팔로우]
+                </div>
+                <div style="text-align:left;">
+                    <span>{{ user.name }}</span>
+                </div>
             </div>
         </div>
     </div>
@@ -481,6 +493,7 @@
                 }
             })
         };
+
         // 로그아웃 //
         $('#login_button').click(function () {
 
@@ -498,6 +511,35 @@
                 }
             });
         });
+        
+        // 프로필 사진 업로드 //
+        async function uploadProfileImage() {
+            let fd = new FormData();    
+            let profileupload = $("#input_user_profile_image");
+            let file = profileupload[0].files[0]; 
+    
+            fd.append("file", file);
+            console.log(file);
+
+            $.ajax({
+                url : "/user/profile/upload/",
+                data : fd ,
+                type : "POST",
+                processData : false ,
+                contentType : false ,
+                success : function (data) {
+                    console.log("성공");     
+                    $('#testdiv').load(window.location.href+' #testdiv');
+                },
+                error : function (request, status, error){
+                    console.log("에러");
+                },
+                complete : function() {
+                    console.log("완료");  
+
+                },
+            });
+        }
     </script>
     <!-- JAVA SCRIPT END -->
 
