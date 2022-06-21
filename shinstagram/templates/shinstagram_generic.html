@@ -22,6 +22,16 @@
 
     <!-- style -->
     <style>
+        .profile_menu {
+            font-size: 12px; 
+            text-align: 
+            center; 
+            color: rgb(153, 153, 153);
+        }
+        .main_icons {
+            cursor:pointer;
+
+        }
         .feed_profile_image_box {
             width: 150px;
             height: 150px;
@@ -264,7 +274,6 @@
     <!-- JAVA SCRIPT START -->
     <script>
         // <!-- jquery 부분 -->
-
         //Add icon click
         $('#add_feed_box').click(function () {
             console.log()
@@ -486,6 +495,7 @@
                 },
             });
         }
+
         // 댓글 업로드 //
         $('.upload_reply').click(function (e) {
             let feed_id = e.target.attributes.getNamedItem('feed_id').value
@@ -516,6 +526,80 @@
                 },
             });
         });
+
+        // 좋아요 갱신 //
+        $('.class_favorite_icon').click(function (e) {
+            let feed_id =e.target.attributes.getNamedItem('feed_id').value
+            let favorite_id = 'feed_favorite_' + feed_id
+            let favorite_text= $('#'+favorite_id).text()
+            
+            if (favorite_text == "favorite"){
+                favorite_status = 'False';
+                $('#'+favorite_id).html('favorite_border')
+                $('#'+favorite_id).css({"color": "black",
+                });
+            }
+            else {
+                favorite_status = 'True';
+                $('#'+favorite_id).html('favorite')  
+                $('#'+favorite_id).css({"color": "rgb(175, 38, 52)",
+            });
+            }
+
+            $.ajax({
+                url : "/content/like/",
+                data : { feed_id : feed_id,
+                        favorite_status : favorite_status
+                } ,
+                method : "POST",
+                success : function (data) {
+                    console.log("성공");   
+                },
+                error : function (request, status, error){
+                    console.log("에러");
+                },
+                complete : function() {
+                    console.log("완료");  
+
+                },
+            });
+        });
+
+        // 북마크 갱신 //
+        $('.class_bookmark_icon').click(function (e) {
+            let feed_id = e.target.attributes.getNamedItem('feed_id').value
+            let bookmark_id = 'feed_bookmark_' + feed_id
+            let bookmark_text= $('#'+bookmark_id).text()
+
+            if (bookmark_text == "bookmark"){
+                bookmark_status = 'False';
+                $('#'+bookmark_id).html('bookmark_border')
+            }
+            else {
+                bookmark_status = 'True';
+                $('#'+bookmark_id).html('bookmark')  
+            }
+
+            $.ajax({
+                url : "/content/bookmark/",
+                data : { feed_id : feed_id,
+                        bookmark_status : bookmark_status
+                } ,
+                method : "POST",
+                success : function (data) {
+                    console.log("성공");     
+                    
+                },
+                error : function (request, status, error){
+                    console.log("에러");
+                },
+                complete : function() {
+                    console.log("완료");  
+
+                },
+            });
+        });
+
 
     </script>
     <!-- JAVA SCRIPT END -->

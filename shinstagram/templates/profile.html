@@ -33,5 +33,37 @@
             </div>
         </div>
     </div>
+    <!-- 중간 회색 선 -->
+    <div style="border-top: solid 0.1px rgb(216, 213, 213); margin-top: 50px; align-items: center;" class="container">
 
+    </div>
+
+    <div>
+        <div style="display: flex; flex-direction:row; margin-top: 15px; justify-content: center; ">
+            <span style="margin-right: 60px; cursor:pointer;">
+                <span id="board_menu" class="profile_menu material-icons-outlined">grid_on게시물</span>
+            </span>
+            <span style="margin-right: 60px; cursor:pointer;">
+                <span id="video_menu" class="profile_menu material-icons-outlined">play_circle동영상</span>
+            </span>
+            <span style="margin-right: 60px; cursor:pointer;">
+                <span id="save_menu" class="profile_menu material-symbols-outlined">bookmark저장됨</span>
+            </span>
+            <span style="margin-right: 60px; cursor:pointer;">
+                <span id="tag_menu" class="profile_menu material-icons-outlined">person_pin태그됨</span>
+            </span>
+        </div>
+    </div>
+
+    <div
+    style="display: flex; flex-direction:row; text-align: center; justify-content: center; padding-top: 70px; ">
+    <div style="width: 600px; min-width: 600px;height: 100%; margin-right: 400px;">
+        <!--피드 시작-->
+        {% for user_content in user_content_list %}
+
+        <div style="border: solid 1px rgb(223, 221, 221); background-color: white; margin-top: 25px; border-radius: 10px">
+            <div><img class="user_image" src="{% get_media_prefix %}{{ user_content.image }}" alt=""></div>
+        </div>
+        {% endfor %}
+    </div>
 {% endblock %}

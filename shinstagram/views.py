@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from content.models import Feed, Reply
+from content.models import Feed, Reply, Like, BookMark
 from user.models import User
 import os
 from mysite.settings import MEDIA_ROOT
@@ -18,11 +18,14 @@ class Main(APIView):
         feed_list = []
         object_feed_list = Feed.objects.all().order_by('-id')
         
+        
         for feed in object_feed_list:
             try:
                 feed_user = User.objects.filter(email=feed.email).first()
                 feed_user_id = feed_user.email[0:feed_user.email.find('@')]
                 feed_user_profile_image = feed_user.profile_image
+                feed_like = Like.objects.filter(feed_id=feed.id, email=email, is_like=True).exists()
+                feed_book = BookMark.objects.filter(feed_id=feed.id, email=email, is_marked=True).exists()
                 reply_object_list = Reply.objects.filter(feed_id=feed.id)
                 reply_list = []
                 
@@ -37,6 +40,8 @@ class Main(APIView):
                 feed_list.append(dict(feed_id=feed.id,
                                     image=feed.image,
                                     content=feed.content,
+                                    is_liked=feed_like,
+                                    is_booked=feed_book,
                                     feed_user_profile_image=feed_user_profile_image,
                                     feed_user_id=feed_user_id,
                                     reply_list=reply_list,
@@ -57,9 +62,15 @@ class Profile(APIView):
     def get(self, request):
         email = request.session.get('email', None)
         user = User.objects.filter(email=email).first()
+        #user_content_list = Feed.objects.all()
         user_id = user.email[0:user.email.find('@')]
         
-        return render(request, "profile.html", context=(dict(user_id=user_id, user=user )))
+        
+        
+        return render(request, "profile.html", context=dict(#user_content_list=user_content_list, 
+                                                             user_id=user_id, 
+                                                             user=user,
+                                                            ))
     
     def post(self, request):
         pass

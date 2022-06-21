@@ -22,12 +22,20 @@
                 <div class="user_contents">
                     <div style="display: flex; flex-direction: row; justify-content: space-between">
                         <div>
-                            <span class="material-icons-outlined">favorite_border</span>
-                            <span class="material-icons-outlined">mode_comment</span>
-                            <span class="material-icons-outlined">send</span>
+                            {% if feed.is_liked %}
+                                <span id="feed_favorite_{{ feed.feed_id }}" feed_id="{{ feed.feed_id }}" style="color: rgb(175, 38, 52);" class="class_favorite_icon main_icons material-icons-outlined">favorite</span>
+                            {% else %}
+                                <span id="feed_favorite_{{ feed.feed_id }}" feed_id="{{ feed.feed_id }}" style="color: black;" class="class_favorite_icon main_icons material-icons-outlined">favorite_border</span>
+                            {% endif %}
+                            <span id="feed_comment" class="main_icons material-icons-outlined">mode_comment</span>
+                            <span id="feed_send" class="main_icons material-icons-outlined">send</span>
                         </div>
                         <div>
-                            <span class="material-icons-outlined" style="width: 25px;">book_mark</span>
+                            {% if feed.is_booked %}
+                                <span id="feed_bookmark_{{ feed.feed_id }}" feed_id="{{ feed.feed_id }}" class="class_bookmark_icon main_icons material-icons-outlined" style="width: 25px;">bookmark</span>
+                            {% else %}
+                                <span id="feed_bookmark_{{ feed.feed_id }}" feed_id="{{ feed.feed_id }}" class="class_bookmark_icon main_icons material-icons-outlined" style="width: 25px;">bookmark_border</span>
+                            {% endif %}
                         </div>
                     </div>
                     <div>

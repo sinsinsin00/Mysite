@@ -33,3 +33,40 @@ class UploadReply(APIView):
         Reply.objects.create(feed_id=feed_id, reply_content=reply_content, email=email)
         
         return Response(status=200)
+    
+    
+class TogleLike(APIView):
+    def post(self, request):
+        feed_id         = request.data.get('feed_id', None)
+        is_like         = request.data.get('favorite_status', None) 
+        email           = request.session.get('email', None) 
+        userLike        = Like.objects.filter(feed_id=feed_id, email=email).first()
+
+        if userLike:
+            userLike.is_like = is_like
+            userLike.save()
+          
+        else:   
+            Like.objects.create(feed_id=feed_id, email=email, is_like=is_like) 
+        
+        return Response(status=200)
+        
+    
+
+
+class TogleBookMark(APIView):
+    def post(self, request):
+        feed_id         = request.data.get('feed_id', None)
+        is_marked       = request.data.get('bookmark_status', None) 
+        email           = request.session.get('email', None) 
+        userBook        = BookMark.objects.filter(feed_id=feed_id, email=email).first()
+        
+        if userBook:
+            userBook.is_marked = is_marked
+            userBook.save()
+          
+        else:   
+            BookMark.objects.create(feed_id=feed_id, email=email, is_marked=is_marked)
+            
+        
+        return Response(status=200)

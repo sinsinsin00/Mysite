@@ -11,7 +11,7 @@ class Feed(models.Model):
 class Like(models.Model):
     feed_id         = models.IntegerField()
     email           = models.EmailField(default='')   # 계정 이메일
-    is_liek         = models.BooleanField(default=False)
+    is_like         = models.BooleanField(default=False)
     
     
 class Reply(models.Model):
