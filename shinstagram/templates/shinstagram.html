@@ -1,8 +1,8 @@
 {% extends 'shinstagram_generic.html' %}
 {% block content %}
 {% load static %}
-   <div
-        style="display: flex; flex-direction:row; text-align: center; justify-content: center; padding-top: 70px; ">
+<div class="container">
+   <div style="display: flex; flex-direction:row; text-align: center; justify-content: center; padding-top: 70px; ">
         <div style="width: 600px; min-width: 600px;height: 100%; margin-right: 400px;">
             <!--피드 시작-->
             {% for feed in feed_list %}
@@ -160,4 +160,5 @@
             </div>
         </div>
     </div>
+</div>
 {% endblock %}

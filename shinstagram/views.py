@@ -62,12 +62,12 @@ class Profile(APIView):
     def get(self, request):
         email = request.session.get('email', None)
         user = User.objects.filter(email=email).first()
-        #user_content_list = Feed.objects.all()
+        user_content_list = Feed.objects.filter(email=email)
         user_id = user.email[0:user.email.find('@')]
         
         
         
-        return render(request, "profile.html", context=dict(#user_content_list=user_content_list, 
+        return render(request, "profile.html", context=dict(user_content_list=user_content_list, 
                                                              user_id=user_id, 
                                                              user=user,
                                                             ))

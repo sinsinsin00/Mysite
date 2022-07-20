@@ -52,8 +52,6 @@ class TogleLike(APIView):
         return Response(status=200)
         
     
-
-
 class TogleBookMark(APIView):
     def post(self, request):
         feed_id         = request.data.get('feed_id', None)
