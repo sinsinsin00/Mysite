@@ -1,14 +1,50 @@
 {% extends 'base_generic.html' %}
 {% block content %}
 {% load static %}
-    <!-- Main Content-->
-    <main class="mb-4">
-        <div class="container px-4 px-lg-5">
-            <div class="row gx-4 gx-lg-5 justify-content-center">
-                <div class="col-md-10 col-lg-8 col-xl-7">
+<!-- Main Content-->
+<main class="mb-4">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <!-- KSS 내용을 이력하는 곳-->
+                <article class="mb-4">
                     <!-- KSS 내용을 이력하는 곳-->
-                </div>
+                    {% for post in post_latest %}
+
+                    <div class="container px-4 px-lg-5">
+                        <div class="row gx-4 gx-lg-5 justify-content-center">
+                            <div class="post-preview">
+                                <a href="{{ post.get_absolute_url }}">
+                                    <h2 class="post-title">{{ post.title }}</h2>
+                                </a>
+                                <div class="entry-date published">{{ post.createDate}}</div>
+                                <p>
+                                <div class="excerpt">
+                                    {%if post.is_content_more300%}
+                                    {{ post.get_content_less300 }}
+                                    {% else %}
+
+                                    <div>
+                                        {% if post.title_image %}
+                                        <img style="width: 100%; height:100%;" src="{{ post.title_image.url }}" alt="">
+                                        {%endif%}
+                                    </div>
+                                    {{ post.content }}
+                                    {%endif%}
+                                </div>
+                                </p>
+                                <p class="post-meta">
+                                    Posted by
+                                    <a href="#!">EVOLABS</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </article>
             </div>
         </div>
-    </main>
+    </div>
+    </div>
+</main>
 {% endblock %}

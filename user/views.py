@@ -45,6 +45,7 @@ class Login(APIView):
         email = request.data.get('email', None)         
         password = request.data.get('password', None)
         
+        print(email)
         if email is not None:
             user = User.objects.filter(email=email).first()
         else:
@@ -72,3 +73,40 @@ class Logout(APIView):
     def post(self, request):
         pass
     
+class Profile(APIView):
+    def get(self, request):
+        email = request.session.get('email', None)
+        user = User.objects.filter(email=email).first()
+        user_id = user.email[0:user.email.find('@')]
+        
+        return render(request, "profile.html", context=(dict(user_id=user_id, user=user )))
+    
+    def post(self, request):
+        pass
+    
+class UploadProfile(APIView):
+    def get(self, request):
+        pass
+    
+    def post(self, request):
+        file = request.FILES['file']
+        email = request.session.get('email', None)
+        user = User.objects.filter(email=email).first()
+
+        if user.profile_image != 'default_image.jpg':
+            try:
+                print("os path : ",os.path.join(MEDIA_ROOT,user.profile_image))
+                os.remove(os.path.join(MEDIA_ROOT,user.profile_image))    
+            except Exception as e:
+                print(e)
+
+        uuid_name = uuid4().hex
+        save_path = os.path.join(MEDIA_ROOT, uuid_name)
+        with open(save_path, 'wb+') as destination:
+            for chunk in file.chunks():
+                destination.write(chunk)
+        profile_image = uuid_name
+        user.profile_image = profile_image
+        user.save()
+        
+        return Response(status=200)

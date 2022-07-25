@@ -10,17 +10,17 @@ def index(request):
     return render(request, "index.html", context=context)
 
 def about(request):
-    context = {}
-    return render(request, "about.html", context=context)
-
-def contact(request):
-    context = {}
-    return render(request, "contact.html", context=context)
-
-def postlist(request):
     post_latest = Post.objects.order_by("-createDate")
     context = {"post_latest": post_latest}
-    return render(request, "postlist.html", context=context)
+    return render(request, "about.html", context=context)
+
+def projects(request):
+    context = {}
+    return render(request, "projects.html", context=context)
+
+def skills(request):
+    context = {}
+    return render(request, "skills.html", context=context)
 
 class PostDetailView(generic.DetailView):
     model = Post
